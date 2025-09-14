@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>World Pulse</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js" defer></script>
+  </head>
+  <body class="theme-dark">
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+      <div class="brand">
+        <h1 class="title">World Pulse</h1>
+        <p class="sub">Welcome—let’s surface what relates to you today.</p>
+      </div>
+      <div class="header-actions">
+        <span class="small" id="updatedHeader">Updated <time id="updatedTime"></time></span>
+        <button id="themeToggle" class="toggle" aria-pressed="false" title="Toggle light/dark">Light</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="media-wrap">
+        <video class="hero-media" src="assets/hero.mp4" muted autoplay loop playsinline poster="assets/hero.jpg"></video>
+        <img class="hero-fallback" src="assets/hero.jpg" alt="Abstract ambient motion" />
+        <div class="overlay"></div>
+        <div class="overlay-contents">
+          <div class="tagline">Signals, not noise.</div>
+          <div id="relates" aria-live="polite" class="relates-row">
+            <span class="badge">…loading</span>
+            <span class="badge">…loading</span>
+            <span class="badge">…loading</span>
+            <span class="badge">…loading</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="content" class="grid" aria-live="polite">
+      <section class="card" data-widget="crypto" aria-busy="true">
+        <header><h3>Crypto</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="fx" aria-busy="true">
+        <header><h3>FX</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="weather" aria-busy="true">
+        <header><h3>Weather</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="apod" aria-busy="true">
+        <header><h3>NASA APOD</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="news" aria-busy="true">
+        <header><h3>Tech Headlines</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="aq" aria-busy="true">
+        <header><h3>Air Quality</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="climate" aria-busy="true">
+        <header><h3>Climate Placeholder</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <section class="card" data-widget="about" aria-busy="true">
+        <header><h3>Welcome</h3></header>
+        <div class="content skeleton">
+          <div class="skeleton-line"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+    </main>
+
+    <noscript>
+      <div class="noscript">Enable JavaScript to hydrate live data.</div>
+    </noscript>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+  </html>
