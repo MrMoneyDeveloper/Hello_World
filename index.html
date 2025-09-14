@@ -77,6 +77,30 @@
       </div>
     </nav>
 
+    <nav class="sphere-nav" aria-label="World sphere">
+      <div class="starfield" aria-hidden="true"></div>
+      <div id="sphere" class="sphere" aria-live="polite">
+        <button class="node" data-widget="crypto" aria-label="Crypto">₿</button>
+        <button class="node" data-widget="fx" aria-label="FX">FX</button>
+        <button class="node" data-widget="weather" aria-label="Weather">☁</button>
+        <button class="node" data-widget="apod" aria-label="NASA APOD">🛰</button>
+        <button class="node" data-widget="news" aria-label="Tech Headlines">HN</button>
+        <button class="node" data-widget="aq" aria-label="Air Quality">AQ</button>
+        <button class="node" data-widget="climate" aria-label="Climate">🌍</button>
+        <button class="node" data-widget="about" aria-label="Welcome">ⓘ</button>
+      </div>
+    </nav>
+
+    <div id="panel" class="panel hidden" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <div class="panel-inner">
+        <button class="panel-close" aria-label="Close">×</button>
+        <section class="card panel-card" aria-busy="true">
+          <header><h3 id="panel-title">Loading…</h3></header>
+          <div class="content skeleton"></div>
+        </section>
+      </div>
+    </div>
+
     <section class="levels" aria-label="Levels">
       <div class="levels-wrap">
         <a href="#card-crypto" class="level" data-level="crypto"><span>Crypto</span></a>

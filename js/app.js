@@ -117,4 +117,52 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.addEventListener('mousemove', (e)=> onMove(e.clientX, e.clientY));
   const onScroll = () => { const y = Math.max(0, window.scrollY); if (tag) tag.style.setProperty('--parY', `${-Math.min(30, y*0.1)}px`); };
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Sphere: place nodes around a sphere and allow drag to rotate
+  const sphere = U.qs('#sphere');
+  if (sphere) {
+    const nodes = U.qsa('.node', sphere);
+    const coords = [
+      { lat:  15, lon:   0 }, // crypto
+      { lat: -10, lon:  60 }, // fx
+      { lat:  10, lon: 120 }, // weather
+      { lat: -20, lon: 180 }, // apod
+      { lat:   5, lon: -120 }, // news
+      { lat: -15, lon:  -60 }, // aq
+      { lat:  25, lon:   90 }, // climate
+      { lat: -25, lon:  -90 }  // about
+    ];
+    nodes.forEach((n,i)=>{ const c = coords[i % coords.length]; n.style.transform = `rotateX(${c.lat}deg) rotateY(${c.lon}deg) translateZ(var(--r))`; });
+    let rx = -12, ry = 0, dragging=false, lx=0, ly=0;
+    const apply = ()=>{ sphere.style.setProperty('--rotX', rx+'deg'); sphere.style.setProperty('--rotY', ry+'deg'); };
+    const onDown = (e)=>{ dragging=true; lx=e.clientX; ly=e.clientY; sphere.setPointerCapture?.(e.pointerId); };
+    const onMove = (e)=>{ if(!dragging) return; const dx=e.clientX-lx, dy=e.clientY-ly; ry += dx*0.15; rx -= dy*0.15; rx=Math.max(-70,Math.min(70,rx)); lx=e.clientX; ly=e.clientY; apply(); };
+    const onUp = (e)=>{ dragging=false; };
+    sphere.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    apply();
+
+    // Open overlay panel with widget content on click
+    const panel = U.qs('#panel');
+    const panelCard = panel && U.qs('.panel-card', panel);
+    const closeBtn = panel && U.qs('.panel-close', panel);
+    const open = async (name)=>{
+      if(!panel || !panelCard) return;
+      panel.classList.remove('hidden');
+      panelCard.setAttribute('aria-busy','true');
+      const mod = registry[name];
+      if (mod && typeof mod.render === 'function') {
+        // Reset skeleton
+        const h = U.qs('header h3', panelCard); if (h) h.textContent = name.toUpperCase();
+        const c = U.qs('.content', panelCard); if (c) { c.innerHTML = `<div class="skeleton-line"></div><div class="skeleton-line short"></div>`; c.classList.add('skeleton'); }
+        try { await mod.render(panelCard); panelCard.removeAttribute('aria-busy'); }
+        catch { /* already skeletoned */ }
+      }
+    };
+    const close = ()=> panel && panel.classList.add('hidden');
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+    nodes.forEach(n=> n.addEventListener('click', ()=> open(n.dataset.widget)));
+  }
 });
