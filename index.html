@@ -23,8 +23,8 @@
 
     <section class="hero">
       <div class="media-wrap">
-        <video class="hero-media" src="assets/hero.mp4" muted autoplay loop playsinline poster="assets/hero.jpg"></video>
-        <img class="hero-fallback" src="assets/hero.jpg" alt="Abstract ambient motion" />
+        <video id="hero" class="hero-media" src="assets/hero.mp4" muted autoplay loop playsinline poster="assets/hero.jpg"></video>
+        <img id="poster" class="hero-fallback" src="assets/hero.jpg" alt="Abstract ambient motion" />
         <div class="overlay"></div>
         <div class="overlay-contents">
           <div class="tagline">Signals, not noise.</div>
@@ -110,5 +110,6 @@
     </noscript>
 
     <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/hero-init.js"></script>
   </body>
   </html>

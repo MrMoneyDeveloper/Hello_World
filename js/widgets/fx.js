@@ -1,8 +1,9 @@
-import { j, fmtNum, renderCard, bus } from '../utils.js';
+import { fmtNum, renderCard, bus } from '../utils.js';
+import { getZarRate } from '../rates.js';
 
 export async function render(el){
   try{
-    const data = await j('https://api.exchangerate.host/latest?base=USD&symbols=ZAR');
+    const data = await getZarRate('USD');
     const rate = data && data.rates && data.rates.ZAR;
     if (rate) bus.emit('fx:rate', rate);
     renderCard(el, 'FX', `<div>1 USD = ${fmtNum(rate,{maximumFractionDigits:2})} ZAR</div>`);
