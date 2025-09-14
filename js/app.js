@@ -59,14 +59,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   U.bus.on('fx:rate', r => setSlot(2, `USD→ZAR: ${U.fmtNum(r, { maximumFractionDigits: 2 })}`));
   U.bus.on('weather:wind', w => setSlot(3, `Wind: ${U.fmtNum(w, { maximumFractionDigits: 0 })} km/h`));
 
-  U.qsa('[data-widget]').forEach(async sec => {
+  // Hydrate widgets with small concurrency to smooth network usage
+  const sections = U.qsa('[data-widget]');
+  const pool = 3; let idx = 0;
+  const runOne = async () => {
+    const sec = sections[idx++]; if (!sec) return;
     const name = sec.dataset.widget; const mod = registry[name];
     if (mod && typeof mod.render === 'function') {
       try { await mod.render(sec); sec.classList.add('hydrated'); sec.removeAttribute('aria-busy'); }
       catch (e) { renderError(sec); }
       finally { U.bus.emit('updated'); U.bus.emit('level:progress', { name, p: 1 }); }
     }
-  });
+    await runOne();
+  };
+  for(let i=0;i<pool;i++) runOne();
 
   const t = U.qs('#themeToggle');
   if (t) t.addEventListener('click', () => {

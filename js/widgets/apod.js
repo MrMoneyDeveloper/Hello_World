@@ -5,7 +5,7 @@ export async function render(el){
   try{
     const data = await getAPOD();
     if (data.media_type === 'image') {
-      renderCard(el, 'NASA APOD', `<img class=\"media\" src=\"${data.url}\" alt=\"${data.title}\"/><div class=\"small\">${data.title}</div>`);
+      renderCard(el, 'NASA APOD', `<img class=\"media\" src=\"${data.url}\" alt=\"${data.title}\" loading=\"lazy\" decoding=\"async\"/><div class=\"small\">${data.title}</div>`);
     } else {
       renderCard(el, 'NASA APOD', `<a href=\"${data.url}\" target=\"_blank\" rel=\"noopener\">Watch: ${data.title}</a>`);
     }

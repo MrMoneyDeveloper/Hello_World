@@ -16,7 +16,8 @@ export const fetchJSON = async (url, { timeout = 10000, headers = {} } = {}) => 
 // shared helper: j(url, { timeoutMs })
 export const j = (url, { timeoutMs } = {}) => fetchJSON(url, { timeout: timeoutMs ?? 10000 });
 export const isDurbanFallback = (loc) => !!loc && (loc === DURBAN || (Math.abs(loc.lat - DURBAN.lat) < 1e-6 && Math.abs(loc.lon - DURBAN.lon) < 1e-6));
-export const geolocate = () => new Promise(res => {
+let GEO_PROM;
+export const geolocate = () => GEO_PROM || (GEO_PROM = new Promise(res => {
   const usp = new URLSearchParams(location.search);
   if (usp.get('demo') === 'no-gps') return res(DURBAN);
   if ('geolocation' in navigator) {
@@ -26,7 +27,7 @@ export const geolocate = () => new Promise(res => {
       { maximumAge: 6e5, timeout: 4e3 }
     );
   } else res(DURBAN);
-});
+}));
 
 // small event bus shared across modules
 export const bus = (() => { const m = {}; return { on: (t, f) => ((m[t] = m[t] || []).push(f)), emit: (t, d) => (m[t] || []).forEach(f => f(d)) }; })();

@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark light" />
     <title>World Pulse</title>
+    <!-- Resource hints -->
+    <link rel="preconnect" href="https://hn.algolia.com" crossorigin>
+    <link rel="preconnect" href="https://api.exchangerate.host" crossorigin>
+    <link rel="preconnect" href="https://api.open-meteo.com" crossorigin>
+    <link rel="preconnect" href="https://air-quality-api.open-meteo.com" crossorigin>
+    <link rel="preconnect" href="https://api.nasa.gov" crossorigin>
+    <link rel="preconnect" href="https://api.pexels.com" crossorigin>
+    <link rel="dns-prefetch" href="//hn.algolia.com">
+    <link rel="dns-prefetch" href="//api.exchangerate.host">
+    <link rel="dns-prefetch" href="//api.open-meteo.com">
+    <link rel="dns-prefetch" href="//air-quality-api.open-meteo.com">
+    <link rel="dns-prefetch" href="//api.nasa.gov">
+    <link rel="dns-prefetch" href="//api.pexels.com">
+    <link rel="preload" as="image" href="assets/hero.jpg">
+    <link rel="preload" as="video" href="assets/hero.mp4" type="video/mp4">
+    <!-- Preload main modules to reduce waterfall -->
+    <link rel="modulepreload" href="js/app.js">
+    <link rel="modulepreload" href="js/utils.js">
+    <link rel="modulepreload" href="js/hero-init.js">
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js" defer></script>
   </head>
@@ -144,5 +163,6 @@
 
     <script type="module" src="js/app.js"></script>
     <script type="module" src="js/hero-init.js"></script>
+    <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
   </body>
   </html>

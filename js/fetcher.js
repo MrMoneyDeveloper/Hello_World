@@ -1,7 +1,7 @@
 // cached fetch with TTL and one retry
 const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
 function cacheKey(url){ return `cache:${url}`; }
-export async function cachedJSON(url, { ttlMs = 8*60*1000, init = {}, retry = true } = {}) {
+export async function cachedJSON(url, { ttlMs = 8*60*1000, init = {}, retry = true, timeoutMs = 10000 } = {}) {
   const k = cacheKey(url);
   const now = Date.now();
   try {
@@ -12,7 +12,10 @@ export async function cachedJSON(url, { ttlMs = 8*60*1000, init = {}, retry = tr
     }
   } catch {}
   try {
-    const r = await fetch(url, init);
+    const ctrl = new AbortController();
+    const id = setTimeout(()=>ctrl.abort(), timeoutMs);
+    const r = await fetch(url, { ...init, signal: ctrl.signal });
+    clearTimeout(id);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const d = await r.json();
     try { localStorage.setItem(k, JSON.stringify({ t: now, d })); } catch {}
@@ -27,4 +30,3 @@ export async function cachedJSON(url, { ttlMs = 8*60*1000, init = {}, retry = tr
     throw e;
   }
 }
-
