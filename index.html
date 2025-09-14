@@ -9,6 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js" defer></script>
   </head>
   <body class="theme-dark">
+    <div id="loader" class="loader-overlay" aria-hidden="true">
+      <div class="warp">
+        <div class="core"></div>
+      </div>
+      <div class="loading-text">Initializing world…</div>
+    </div>
     <a class="skip-link" href="#content">Skip to content</a>
     <header class="site-header">
       <div class="brand">
@@ -38,8 +44,35 @@
       </div>
     </section>
 
+    <nav class="orbit-nav" aria-label="Quick sections">
+      <div class="starfield" aria-hidden="true"></div>
+      <div class="orbit-wrap" id="orbit">
+        <a class="orb" href="#card-crypto" aria-label="Crypto"><span>₿</span></a>
+        <a class="orb" href="#card-fx" aria-label="FX"><span>FX</span></a>
+        <a class="orb" href="#card-weather" aria-label="Weather"><span>☁</span></a>
+        <a class="orb" href="#card-apod" aria-label="NASA APOD"><span>🛰</span></a>
+        <a class="orb" href="#card-news" aria-label="Tech Headlines"><span>HN</span></a>
+        <a class="orb" href="#card-aq" aria-label="Air Quality"><span>AQ</span></a>
+        <a class="orb" href="#card-climate" aria-label="Climate"><span>🌍</span></a>
+        <a class="orb" href="#card-about" aria-label="Welcome"><span>ⓘ</span></a>
+      </div>
+    </nav>
+
+    <section class="levels" aria-label="Levels">
+      <div class="levels-wrap">
+        <a href="#card-crypto" class="level" data-level="crypto"><span>Crypto</span></a>
+        <a href="#card-fx" class="level" data-level="fx"><span>FX</span></a>
+        <a href="#card-weather" class="level" data-level="weather"><span>Weather</span></a>
+        <a href="#card-apod" class="level" data-level="apod"><span>APOD</span></a>
+        <a href="#card-news" class="level" data-level="news"><span>Tech</span></a>
+        <a href="#card-aq" class="level" data-level="aq"><span>AQ</span></a>
+        <a href="#card-climate" class="level" data-level="climate"><span>Climate</span></a>
+        <a href="#card-about" class="level" data-level="about"><span>Welcome</span></a>
+      </div>
+    </section>
+
     <main id="content" class="grid" aria-live="polite">
-      <section class="card" data-widget="crypto" aria-busy="true">
+      <section id="card-crypto" class="card" data-widget="crypto" aria-busy="true">
         <header><h3>Crypto</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
@@ -47,7 +80,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="fx" aria-busy="true">
+      <section id="card-fx" class="card" data-widget="fx" aria-busy="true">
         <header><h3>FX</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
@@ -55,7 +88,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="weather" aria-busy="true">
+      <section id="card-weather" class="card" data-widget="weather" aria-busy="true">
         <header><h3>Weather</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
@@ -63,7 +96,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="apod" aria-busy="true">
+      <section id="card-apod" class="card" data-widget="apod" aria-busy="true">
         <header><h3>NASA APOD</h3></header>
         <div class="content skeleton">
           <div class="skeleton-thumb"></div>
@@ -71,7 +104,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="news" aria-busy="true">
+      <section id="card-news" class="card" data-widget="news" aria-busy="true">
         <header><h3>Tech Headlines</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
@@ -80,7 +113,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="aq" aria-busy="true">
+      <section id="card-aq" class="card" data-widget="aq" aria-busy="true">
         <header><h3>Air Quality</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
@@ -88,7 +121,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="climate" aria-busy="true">
+      <section id="card-climate" class="card" data-widget="climate" aria-busy="true">
         <header><h3>Climate Placeholder</h3></header>
         <div class="content skeleton">
           <div class="skeleton-thumb"></div>
@@ -96,7 +129,7 @@
         </div>
       </section>
 
-      <section class="card" data-widget="about" aria-busy="true">
+      <section id="card-about" class="card" data-widget="about" aria-busy="true">
         <header><h3>Welcome</h3></header>
         <div class="content skeleton">
           <div class="skeleton-line"></div>
