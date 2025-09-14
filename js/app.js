@@ -150,6 +150,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const open = async (name)=>{
       if(!panel || !panelCard) return;
       panel.classList.remove('hidden');
+      if (sphere) sphere.classList.add('hidden');
       panelCard.setAttribute('aria-busy','true');
       const mod = registry[name];
       if (mod && typeof mod.render === 'function') {
@@ -160,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         catch { /* already skeletoned */ }
       }
     };
-    const close = ()=> panel && panel.classList.add('hidden');
+    const close = ()=> { if(panel) panel.classList.add('hidden'); if (sphere) sphere.classList.remove('hidden'); };
     if (closeBtn) closeBtn.addEventListener('click', close);
     window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
     nodes.forEach(n=> n.addEventListener('click', ()=> open(n.dataset.widget)));
